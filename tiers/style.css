@@ -1,0 +1,77 @@
+:root {
+    --boardColor-1: #eeeed2;
+    --boardColor-2: #769656;
+    --boardColor-int-2-there: #d8d400;
+    --boardColor-int-2-move: #0082ce;
+    --boardColor-int-2-take: #d30000;
+    --boardColor-int-2-taker: radial-gradient(var(--boardColor-int-2-take), var(--boardColor-2));
+    --boardColor-int-1-there: #fff279;
+    --boardColor-int-1-move: #99b4ff;
+    --boardColor-int-1-take: #ff8080;
+    --boardColor-int-1-taker: radial-gradient(var(--boardColor-int-1-take), var(--boardColor-1));
+    --background: #7a7a7a;
+    --whiteColor: #d3d3d3;
+    --blackColor: #5a5a5a;
+}
+
+html {
+    overflow: hidden;
+}
+
+body {
+    box-sizing: border-box;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--background);
+}
+
+#board {
+    border-spacing: 0;
+}
+
+#board #move {
+    width: 10px;
+    background: var(--whiteColor);
+    border-right: 5px solid var(--background);
+}
+
+.square {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    vertical-align: top;
+    font-size: 7px;
+    width: 50px;
+    height: 50px;
+}
+.square.o { 
+    background: var(--boardColor-1); 
+    color: var(--boardColor-2);
+}
+.square.t { 
+    background: var(--boardColor-2); 
+    color: var(--boardColor-1);
+}
+.square.t.there { background: var(--boardColor-int-2-there); }
+.square.t.move { background: var(--boardColor-int-2-move); }
+.square.t.take { background: var(--boardColor-int-2-take); }
+.square.t.taker { background: var(--boardColor-int-2-taker); }
+.square.o.there { background: var(--boardColor-int-1-there); }
+.square.o.move { background: var(--boardColor-int-1-move); }
+.square.o.take { background: var(--boardColor-int-1-take); }
+.square.o.taker { background: var(--boardColor-int-1-taker); }
+
+.piece {
+    margin-top: -9px;
+    width: 50px;
+    height: 50px;
+}
+
+#endgame {
+    width: calc(100% - 46px);
+    box-sizing: border-box;
+    padding: 15px;
+    padding-left: 10%;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    margin: 15px;
+    font-size: 48px;
+    border-radius: 5rem;
+}
