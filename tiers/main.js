@@ -1,63 +1,70 @@
+var blockResets = false
+
 var boardL = [
-    [ null, null, null, null, null, null, null, null ],
-    [ null, null, null, null, null, null, null, null ],
-    [ null, null, null, null, null, null, null, null ],
-    [ null, null, null, null, null, null, null, null ],
-    [ null, null, null, null, null, null, null, null ],
-    [ null, null, null, null, null, null, null, null ],
-    [ null, null, null, null, null, null, null, null ],
-    [ null, null, null, null, null, null, null, null ],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
 ]
 var boardNames = [
-    [ "A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8" ],
-    [ "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8" ],
-    [ "C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8" ],
-    [ "D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8" ],
-    [ "E1", "E2", "E3", "E4", "E5", "E6", "E7", "E8" ],
-    [ "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8" ],
-    [ "G1", "G2", "G3", "G4", "G5", "G6", "G7", "G8" ],
-    [ "H1", "H2", "H3", "H4", "H5", "H6", "H7", "H8" ],
+    ["A0", "A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9"],
+    ["B0", "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9"],
+    ["C0", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9"],
+    ["D0", "D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9"],
+    ["E0", "E1", "E2", "E3", "E4", "E5", "E6", "E7", "E8", "E9"],
+    ["F0", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9"],
+    ["G0", "G1", "G2", "G3", "G4", "G5", "G6", "G7", "G8", "G9"],
+    ["H0", "H1", "H2", "H3", "H4", "H5", "H6", "H7", "H8", "H9"],
+    ["I0", "I1", "I2", "I3", "I4", "I5", "I6", "I7", "I8", "I9"],
+    ["J0", "J1", "J2", "J3", "J4", "J5", "J6", "J7", "J8", "J9"],
 ]
+
 const pieces = {
     "white-pawn": {
-        "imgSrc": "pieces/white/pawn.png",
-        "imgAlt": "white-pawn",
-        "classes": "piece white pawn",
+        imgSrc: "pieces/white/pawn.png",
+        imgAlt: "white-pawn",
+        classes: "piece white pawn",
     },
     "white-king": {
-        "imgSrc": "pieces/white/king.png",
-        "imgAlt": "white-king",
-        "classes": "piece white king",
+        imgSrc: "pieces/white/king.png",
+        imgAlt: "white-king",
+        classes: "piece white king",
     },
     "white-queen": {
-        "imgSrc": "pieces/white/queen.png",
-        "imgAlt": "white-queen",
-        "classes": "piece white queen",
+        imgSrc: "pieces/white/queen.png",
+        imgAlt: "white-queen",
+        classes: "piece white queen",
     },
     "white-rook": {
-        "imgSrc": "pieces/white/rook.png",
-        "imgAlt": "white-rook",
-        "classes": "piece white rook",
+        imgSrc: "pieces/white/rook.png",
+        imgAlt: "white-rook",
+        classes: "piece white rook",
     },
     "white-bishop": {
-        "imgSrc": "pieces/white/bishop.png",
-        "imgAlt": "white-bishop",
-        "classes": "piece white bishop",
+        imgSrc: "pieces/white/bishop.png",
+        imgAlt: "white-bishop",
+        classes: "piece white bishop",
     },
     "white-horse": {
-        "imgSrc": "pieces/white/horsey.png",
-        "imgAlt": "white-horsey",
-        "classes": "piece white horsey",
+        imgSrc: "pieces/white/horsey.png",
+        imgAlt: "white-horsey",
+        classes: "piece white horsey",
     },
     "black-normal": {
-        "imgSrc": "pieces/black/normal.png",
-        "imgAlt": "black-normal",
-        "classes": "piece black pawn",
+        imgSrc: "pieces/black/normal.png",
+        imgAlt: "black-normal",
+        classes: "piece black pawn",
     },
     "black-dama": {
-        "imgSrc": "pieces/black/dama.png",
-        "imgAlt": "black-lady",
-        "classes": "piece black dama",
+        imgSrc: "pieces/black/dama.png",
+        imgAlt: "black-lady",
+        classes: "piece black dama",
     },
 }
 var colorMove = "white"
@@ -81,20 +88,20 @@ window.onload = () => {
 function generateBoard() {
     var board = document.createElement("table")
     board.id = "board"
-    
+
     var move = document.createElement("td")
     move.id = "move"
-    move.colSpan = 8
+    move.colSpan = boardL.length
 
     board.appendChild
-    for (var i = 0; i < 8; i++) {
+    for (var i = 0; i < boardL.length; i++) {
         var row = document.createElement("tr")
-    
-        for (var j = 0; j < 8; j++) {
+
+        for (var j = 0; j < boardL[i].length; j++) {
             if (i + j == 0) {
                 var move = document.createElement("td")
                 move.id = "move"
-                move.rowSpan = 8
+                move.rowSpan = boardL[i].length
 
                 row.appendChild(move)
             }
@@ -104,16 +111,17 @@ function generateBoard() {
             cell.id = i.toString() + j.toString()
             cell.classList.add("square")
             cell.classList.add((i + j) % 2 == 0 ? "o" : "t")
+            if (i % 9 === 0 || j % 9 === 0) cell.classList.add("red")
             row.appendChild(cell)
         }
-    
+
         board.appendChild(row)
     }
 
     document.body.appendChild(board)
 
     var elements = document.querySelectorAll(`#board td.square`)
-    elements.forEach(element => {
+    elements.forEach((element) => {
         element.addEventListener("click", () => {
             if (element.classList.contains("there")) resetClasses()
             else if (element.classList.contains("move")) movePiece(element.id)
@@ -129,7 +137,7 @@ function generateBoard() {
  */
 function addWhitePieces() {
     function addWhitePawns() {
-        for (var i = 0; i < 8; i++) {
+        for (var i = 1; i < 9; i++) {
             var pawn = document.createElement("div")
             pawn.className = "piece white pawn"
             var img = document.createElement("img")
@@ -138,11 +146,11 @@ function addWhitePieces() {
             img.width = 50
             img.height = 50
             img.draggable = false
-            pawn.appendChild(img);
-            var cell = document.getElementById("1" + i)
+            pawn.appendChild(img)
+            var cell = document.getElementById("2" + i)
             cell.appendChild(pawn)
 
-            boardL[1][i] = "white-pawn"
+            boardL[2][i] = "white-pawn"
         }
     }
     function addRooks() {
@@ -155,11 +163,11 @@ function addWhitePieces() {
             img.width = 50
             img.height = 50
             img.draggable = false
-            piece.appendChild(img);
-            var cell = document.getElementById("0" + i * 7)
+            piece.appendChild(img)
+            var cell = document.getElementById("1" + (i * 7 + 1))
             cell.appendChild(piece)
 
-            boardL[0][i * 7] = "white-rook"
+            boardL[1][i * 7 + 1] = "white-rook"
         }
     }
     function addHorses() {
@@ -172,12 +180,12 @@ function addWhitePieces() {
             img.width = 50
             img.height = 50
             img.draggable = false
-            piece.appendChild(img);
+            piece.appendChild(img)
 
-            var cell = document.getElementById("0" + (i * 5 + 1))
+            var cell = document.getElementById("1" + (i * 5 + 2))
             cell.appendChild(piece)
 
-            boardL[0][i * 5 + 1] = "white-horse"
+            boardL[1][i * 5 + 2] = "white-horse"
         }
     }
     function addBishops() {
@@ -190,12 +198,12 @@ function addWhitePieces() {
             img.width = 50
             img.height = 50
             img.draggable = false
-            piece.appendChild(img);
+            piece.appendChild(img)
 
-            var cell = document.getElementById("0" + (i * 3 + 2))
+            var cell = document.getElementById("1" + (i * 3 + 3))
             cell.appendChild(piece)
 
-            boardL[0][i * 3 + 2] = "white-bishop"
+            boardL[1][i * 3 + 3] = "white-bishop"
         }
     }
     function addQueen() {
@@ -207,12 +215,12 @@ function addWhitePieces() {
         img.width = 50
         img.height = 50
         img.draggable = false
-        piece.appendChild(img);
+        piece.appendChild(img)
 
-        var cell = document.getElementById("03")
+        var cell = document.getElementById("14")
         cell.appendChild(piece)
 
-        boardL[0][3] = "white-queen"
+        boardL[1][4] = "white-queen"
     }
     function addKing() {
         var piece = document.createElement("div")
@@ -223,12 +231,12 @@ function addWhitePieces() {
         img.width = 50
         img.height = 50
         img.draggable = false
-        piece.appendChild(img);
+        piece.appendChild(img)
 
-        var cell = document.getElementById("04")
+        var cell = document.getElementById("15")
         cell.appendChild(piece)
 
-        boardL[0][4] = "white-king"
+        boardL[1][5] = "white-king"
     }
 
     addWhitePawns()
@@ -243,27 +251,27 @@ function addWhitePieces() {
  * Adds the black pieces
  */
 function addBlackPieces() {
-    for (var i = 5; i < 8; i++) {
-        for (var j = 0; j < 8; j++) {
+    for (var i = 7; i < 10; i++) {
+        for (var j = 0; j < 10; j++) {
             var piece = document.createElement("div")
-            piece.className = `piece black ${i == 7 && j > 1 && j < 6 ? "dama" : "normal"}`
+            piece.className = `piece black normal`
             var img = document.createElement("img")
-            img.src = `pieces/black/${i == 7 && j > 1 && j < 6 ? "dama" : "normal"}.png`
-            img.alt = i == 7 && j > 1 && j < 6 ? "black-lady" : "black-normal"
+            img.src = `pieces/black/normal.png`
+            img.alt = "black-normal"
             img.width = 50
             img.height = 50
             img.draggable = false
-            piece.appendChild(img);
+            piece.appendChild(img)
             var cell = document.getElementById(i.toString() + j.toString())
             cell.appendChild(piece)
 
-            boardL[i][j] = i == 7 && j > 1 && j < 6 ? "black-dama" : "black-normal"
+            boardL[i][j] = "black-normal"
         }
     }
 }
 /**
  * This function gives a full list of legal moves. It isn't works at 100% + the king isn't have a possible checkmate/checks blocks
- * 
+ *
  * @param {string} piece The piece id to check the legal moves. All possible ids can be found on JSON list `pieces`.
  * @param {number} row The number of rows (`board[`**`row`**`][col]`)
  * @param {number} col The number of columns (`board[row][`**`col`**`]`)
@@ -273,25 +281,25 @@ function addBlackPieces() {
 function getLegalMoves(piece, row, col, board) {
     //console.log(row, col, piece)
     blackTakeCords = {}
-    const legalMoves = [];
-  
-    switch(piece) {
+    const legalMoves = []
+
+    switch (piece) {
         case "white-pawn": {
-            if (row === 1 && board[row+1][col] == null) {
-                legalMoves.push({ cor: [row+1, col], isTaking: false });
-                if (board[row+2][col] === null) {
-                    legalMoves.push({ cor: [row+2, col], isTaking: false });
+            if (row === 2 && board[row + 1][col] == null) {
+                legalMoves.push({ cor: [row + 1, col], isTaking: false })
+                if (board[row + 2][col] === null) {
+                    legalMoves.push({ cor: [row + 2, col], isTaking: false })
                 }
-            } else if (row < 7 && board[row+1][col] == null) {
-                legalMoves.push({ cor: [row+1, col], isTaking: false });
+            } else if (row < 9 && board[row + 1][col] == null) {
+                legalMoves.push({ cor: [row + 1, col], isTaking: false })
             }
-            if (col > 0 && row < 7 && board[row+1][col-1] !== null && board[row+1][col-1].startsWith("black")) {
-                legalMoves.push({ cor: [row+1, col-1], isTaking: true });
+            if (col > 1 && row < 9 && board[row + 1][col - 1] !== null && board[row + 1][col - 1].startsWith("black")) {
+                legalMoves.push({ cor: [row + 1, col - 1], isTaking: true })
             }
-            if (col < 7 && row < 7 && board[row+1][col+1] !== null && board[row+1][col+1].startsWith("black")) {
-                legalMoves.push({ cor: [row+1, col+1], isTaking: true });
+            if (col < 8 && row < 9 && board[row + 1][col + 1] !== null && board[row + 1][col + 1].startsWith("black")) {
+                legalMoves.push({ cor: [row + 1, col + 1], isTaking: true })
             }
-            break;
+            break
         }
         case "white-horse": {
             let horseyMoves = [
@@ -302,312 +310,269 @@ function getLegalMoves(piece, row, col, board) {
                 [1, 2],
                 [1, -2],
                 [-1, 2],
-                [-1, -2]
-            ];
+                [-1, -2],
+            ]
             // iterate over all possible moves
             for (let move of horseyMoves) {
-                let newRow = row + move[0];
-                let newCol = col + move[1];
+                let newRow = row + move[0]
+                let newCol = col + move[1]
                 // check if the move is inside the board
-                if (newRow >= 0 && newRow < 8 && newCol >= 0 && newCol < 8) {
+                if (newRow >= 1 && newRow < 9 && newCol >= 1 && newCol < 9) {
                     // check if the target field is empty or occupied by an enemy piece
                     if (board[newRow][newCol] == null || (board[newRow][newCol] != null && !board[newRow][newCol].startsWith("white"))) {
                         // add the move to the list of possible moves
                         legalMoves.push({
                             cor: [newRow, newCol],
-                            isTaking: board[newRow][newCol] != null && board[newRow][newCol].startsWith("black")
-                        });
+                            isTaking: board[newRow][newCol] != null && board[newRow][newCol].startsWith("black"),
+                        })
                     }
                 }
             }
-            break;
+            break
         }
         case "white-bishop":
-            for (let i = 1; row + i < 8 && col + i < 8; i++) {
+            for (let i = 1; row + i < 9 && col + i < 9; i++) {
                 if (!board[row + i][col + i]) {
-                    legalMoves.push({ cor: [row + i, col + i], isTaking: false });
+                    legalMoves.push({ cor: [row + i, col + i], isTaking: false })
                 } else {
                     if (board[row + i][col + i].includes("black")) {
-                        legalMoves.push({ cor: [row + i, col + i], isTaking: true });
+                        legalMoves.push({ cor: [row + i, col + i], isTaking: true })
                     }
-                    break;
+                    break
                 }
             }
-            for (let i = 1; row - i >= 0 && col - i >= 0; i++) {
+            for (let i = 1; row - i >= 1 && col - i >= 1; i++) {
                 if (!board[row - i][col - i]) {
-                    legalMoves.push({ cor: [row - i, col - i], isTaking: false });
+                    legalMoves.push({ cor: [row - i, col - i], isTaking: false })
                 } else {
                     if (board[row - i][col - i].includes("black")) {
-                        legalMoves.push({ cor: [row - i, col - i], isTaking: true });
+                        legalMoves.push({ cor: [row - i, col - i], isTaking: true })
                     }
-                    break;
+                    break
                 }
             }
-            for (let i = 1; row + i < 8 && col - i >= 0; i++) {
+            for (let i = 1; row + i < 9 && col - i >= 1; i++) {
                 if (!board[row + i][col - i]) {
-                    legalMoves.push({ cor: [row + i, col - i], isTaking: false });
+                    legalMoves.push({ cor: [row + i, col - i], isTaking: false })
                 } else {
                     if (board[row + i][col - i].includes("black")) {
-                        legalMoves.push({ cor: [row + i, col - i], isTaking: true });
+                        legalMoves.push({ cor: [row + i, col - i], isTaking: true })
                     }
-                    break;
+                    break
                 }
             }
-            for (let i = 1; row - i >= 0 && col + i < 8; i++) {
+            for (let i = 1; row - i >= 1 && col + i < 9; i++) {
                 if (!board[row - i][col + i]) {
-                    legalMoves.push({ cor: [row - i, col + i], isTaking: false });
+                    legalMoves.push({ cor: [row - i, col + i], isTaking: false })
                 } else {
                     if (board[row - i][col + i].includes("black")) {
-                        legalMoves.push({ cor: [row - i, col + i], isTaking: true });
+                        legalMoves.push({ cor: [row - i, col + i], isTaking: true })
                     }
-                    break;
+                    break
                 }
             }
-            break;
+            break
         case "white-rook":
-            for (let i = row - 1; i >= 0; i--) {
+            for (let i = row - 1; i >= 1; i--) {
                 if (board[i][col] === null) {
-                    legalMoves.push({ cor: [i, col], isTaking: false });
+                    legalMoves.push({ cor: [i, col], isTaking: false })
                 } else if (board[i][col].startsWith("black")) {
-                    legalMoves.push({ cor: [i, col], isTaking: true });
-                    break;
+                    legalMoves.push({ cor: [i, col], isTaking: true })
+                    break
                 } else {
-                    break;
+                    break
                 }
             }
 
-            for (let i = row + 1; i < 8; i++) {
+            for (let i = row + 1; i < 9; i++) {
                 if (board[i][col] === null) {
-                    legalMoves.push({ cor: [i, col], isTaking: false });
+                    legalMoves.push({ cor: [i, col], isTaking: false })
                 } else if (board[i][col].startsWith("black")) {
-                    legalMoves.push({ cor: [i, col], isTaking: true });
-                    break;
+                    legalMoves.push({ cor: [i, col], isTaking: true })
+                    break
                 } else {
-                    break;
+                    break
                 }
             }
 
-            for (let j = col - 1; j >= 0; j--) {
+            for (let j = col - 1; j >= 1; j--) {
                 if (board[row][j] === null) {
-                    legalMoves.push({ cor: [row, j], isTaking: false });
+                    legalMoves.push({ cor: [row, j], isTaking: false })
                 } else if (board[row][j].startsWith("black")) {
-                    legalMoves.push({ cor: [row, j], isTaking: true });
-                    break;
+                    legalMoves.push({ cor: [row, j], isTaking: true })
+                    break
                 } else {
-                    break;
+                    break
                 }
             }
 
-            for (let j = col + 1; j < 8; j++) {
+            for (let j = col + 1; j < 9; j++) {
                 if (board[row][j] === null) {
-                    legalMoves.push({ cor: [row, j], isTaking: false });
+                    legalMoves.push({ cor: [row, j], isTaking: false })
                 } else if (board[row][j].startsWith("black")) {
-                    legalMoves.push({ cor: [row, j], isTaking: true });
-                    break;
+                    legalMoves.push({ cor: [row, j], isTaking: true })
+                    break
                 } else {
-                    break;
+                    break
                 }
             }
-            break;
+            break
         case "white-queen":
-            for (let i = 1; row + i < 8 && col + i < 8; i++) {
+            for (let i = 1; row + i < 9 && col + i < 9; i++) {
                 if (!board[row + i][col + i]) {
-                    legalMoves.push({ cor: [row + i, col + i], isTaking: false });
+                    legalMoves.push({ cor: [row + i, col + i], isTaking: false })
                 } else {
                     if (board[row + i][col + i].includes("black")) {
-                        legalMoves.push({ cor: [row + i, col + i], isTaking: true });
+                        legalMoves.push({ cor: [row + i, col + i], isTaking: true })
                     }
-                    break;
+                    break
                 }
             }
-            for (let i = 1; row - i >= 0 && col - i >= 0; i++) {
+            for (let i = 1; row - i >= 1 && col - i >= 1; i++) {
                 if (!board[row - i][col - i]) {
-                    legalMoves.push({ cor: [row - i, col - i], isTaking: false });
+                    legalMoves.push({ cor: [row - i, col - i], isTaking: false })
                 } else {
                     if (board[row - i][col - i].includes("black")) {
-                        legalMoves.push({ cor: [row - i, col - i], isTaking: true });
+                        legalMoves.push({ cor: [row - i, col - i], isTaking: true })
                     }
-                    break;
+                    break
                 }
             }
-            for (let i = 1; row + i < 8 && col - i >= 0; i++) {
+            for (let i = 1; row + i < 9 && col - i >= 1; i++) {
                 if (!board[row + i][col - i]) {
-                    legalMoves.push({ cor: [row + i, col - i], isTaking: false });
+                    legalMoves.push({ cor: [row + i, col - i], isTaking: false })
                 } else {
                     if (board[row + i][col - i].includes("black")) {
-                        legalMoves.push({ cor: [row + i, col - i], isTaking: true });
+                        legalMoves.push({ cor: [row + i, col - i], isTaking: true })
                     }
-                    break;
+                    break
                 }
             }
-            for (let i = 1; row - i >= 0 && col + i < 8; i++) {
+            for (let i = 1; row - i >= 1 && col + i < 9; i++) {
                 if (!board[row - i][col + i]) {
-                    legalMoves.push({ cor: [row - i, col + i], isTaking: false });
+                    legalMoves.push({ cor: [row - i, col + i], isTaking: false })
                 } else {
                     if (board[row - i][col + i].includes("black")) {
-                        legalMoves.push({ cor: [row - i, col + i], isTaking: true });
+                        legalMoves.push({ cor: [row - i, col + i], isTaking: true })
                     }
-                    break;
+                    break
                 }
             }
 
-
-            for (let i = row - 1; i >= 0; i--) {
+            for (let i = row - 1; i >= 1; i--) {
                 if (board[i][col] === null) {
-                    legalMoves.push({ cor: [i, col], isTaking: false });
+                    legalMoves.push({ cor: [i, col], isTaking: false })
                 } else if (board[i][col].startsWith("black")) {
-                    legalMoves.push({ cor: [i, col], isTaking: true });
-                    break;
+                    legalMoves.push({ cor: [i, col], isTaking: true })
+                    break
                 } else {
-                    break;
+                    break
                 }
             }
-            for (let i = row + 1; i < 8; i++) {
+            for (let i = row + 1; i < 9; i++) {
                 if (board[i][col] === null) {
-                    legalMoves.push({ cor: [i, col], isTaking: false });
+                    legalMoves.push({ cor: [i, col], isTaking: false })
                 } else if (board[i][col].startsWith("black")) {
-                    legalMoves.push({ cor: [i, col], isTaking: true });
-                    break;
+                    legalMoves.push({ cor: [i, col], isTaking: true })
+                    break
                 } else {
-                    break;
+                    break
                 }
             }
-            for (let j = col - 1; j >= 0; j--) {
+            for (let j = col - 1; j >= 1; j--) {
                 if (board[row][j] === null) {
-                    legalMoves.push({ cor: [row, j], isTaking: false });
+                    legalMoves.push({ cor: [row, j], isTaking: false })
                 } else if (board[row][j].startsWith("black")) {
-                    legalMoves.push({ cor: [row, j], isTaking: true });
-                    break;
+                    legalMoves.push({ cor: [row, j], isTaking: true })
+                    break
                 } else {
-                    break;
+                    break
                 }
             }
-            for (let j = col + 1; j < 8; j++) {
+            for (let j = col + 1; j < 9; j++) {
                 if (board[row][j] === null) {
-                    legalMoves.push({ cor: [row, j], isTaking: false });
+                    legalMoves.push({ cor: [row, j], isTaking: false })
                 } else if (board[row][j].startsWith("black")) {
-                    legalMoves.push({ cor: [row, j], isTaking: true });
-                    break;
+                    legalMoves.push({ cor: [row, j], isTaking: true })
+                    break
                 } else {
-                    break;
+                    break
                 }
             }
-            break;
+            break
         case "white-king": {
-            const possibleMoves = [    
-                [row - 1, col - 1], 
-                [row - 1, col], 
+            const possibleMoves = [
+                [row - 1, col - 1],
+                [row - 1, col],
                 [row - 1, col + 1],
-                [row, col - 1], 
+                [row, col - 1],
                 [row, col + 1],
-                [row + 1, col - 1], 
-                [row + 1, col], 
+                [row + 1, col - 1],
+                [row + 1, col],
                 [row + 1, col + 1],
-            ];
+            ]
 
             // Check each possible move
             for (const [r, c] of possibleMoves) {
                 // Check if move is inside board
-                if (r >= 0 && r < 8 && c >= 0 && c < 8) {
-                    const destPiece = board[r][c];
-                    const isTaking = destPiece != null && destPiece.startsWith("black");
+                if (r >= 1 && r < 9 && c >= 1 && c < 9) {
+                    const destPiece = board[r][c]
+                    const isTaking = destPiece != null && destPiece.startsWith("black")
 
                     // King can move to empty square or capture opponent's piece
                     if (destPiece === null || isTaking) {
-                        legalMoves.push({ cor: [r, c], isTaking: isTaking });
+                        legalMoves.push({ cor: [r, c], isTaking: isTaking })
                     }
                 }
             }
-            break;
+            break
         }
+        case "black-dama":
         case "black-normal": {
             // walking
-            if (row - 1 >= 0 && col + 1 <= 7 && board[row-1][col+1] == null) {
-                legalMoves.push({ cor: [row-1, col+1], isTaking: false });
+            if (row - 1 >= 1 && col + 1 <= 8 && board[row - 1][col + 1] == null) {
+                legalMoves.push({ cor: [row - 1, col + 1], isTaking: false })
             }
-            if (row - 1 >= 0 && col - 1 >= 0 && board[row-1][col-1] == null) {
-                legalMoves.push({ cor: [row-1, col-1], isTaking: false });
+            if (row - 1 >= 1 && col - 1 >= 1 && board[row - 1][col - 1] == null) {
+                legalMoves.push({ cor: [row - 1, col - 1], isTaking: false })
             }
-            
-            // walking back
-            if (row + 1 <= 4 && col + 1 <= 7 && board[row+1][col+1] == null) {
-                legalMoves.push({ cor: [row+1, col+1], isTaking: false });
-            }
-            if (row + 1 <= 4 && col - 1 >= 0 && board[row+1][col-1] == null) {
-                legalMoves.push({ cor: [row+1, col-1], isTaking: false });
-            }
-            
+
             // check jump moves
-            if (row - 2 >= 0 && col + 2 <= 7 && board[row-1][col+1] != null && board[row-1][col+1].startsWith("white") && board[row-2][col+2] == null) {
-                legalMoves.push({ cor: [row-2, col+2], isTaking: true, takeCor: [row-1, col+1] });
-                blackTakeCords[`${row-2}${col+2}`] = [row-1, col+1]
+            if (row - 2 >= 0 && col - 2 >= 0 && board[row - 1][col - 1] != null && board[row - 1][col - 1].startsWith("white") && board[row - 2][col - 2] == null) {
+                legalMoves.push({ cor: [row - 2, col - 2], isTaking: true, takeCor: [row - 1, col - 1] })
+                blackTakeCords[`${row - 2}${col - 2}`] = [row - 1, col - 1]
             }
-            if (row - 2 >= 0 && col - 2 >= 0 && board[row-1][col-1] != null && board[row-1][col-1].startsWith("white") && board[row-2][col-2] == null) {
-                legalMoves.push({ cor: [row-2, col-2], isTaking: true, takeCor: [row-1, col-1] });
-                blackTakeCords[`${row-2}${col-2}`] = [row-1, col-1]
+            if (row - 2 >= 0 && col + 2 < 10 && board[row - 1][col + 1] != null && board[row - 1][col + 1].startsWith("white") && board[row - 2][col + 2] == null) {
+                legalMoves.push({ cor: [row - 2, col + 2], isTaking: true, takeCor: [row - 1, col + 1] })
+                blackTakeCords[`${row - 2}${col + 2}`] = [row - 1, col + 1]
             }
-            if (row + 2 < 8 && col - 2 >= 0 && board[row+1][col-1] != null && board[row+1][col-1].startsWith("white") && board[row+2][col-2] == null) {
-                legalMoves.push({ cor: [row+2, col-2], isTaking: true, takeCor: [row+1, col-1] });
-                blackTakeCords[`${row+2}${col-2}`] = [row+1, col-1]
-            }
-            if (row + 2 < 8 && col + 2 < 8 && board[row+1][col+1] != null && board[row+1][col+1].startsWith("white") && board[row+2][col+2] == null) {
-                legalMoves.push({ cor: [row+2, col+2], isTaking: true, takeCor: [row+1, col+1] });
-                blackTakeCords[`${row+2}${col+2}`] = [row+1, col+1]
-            }
-            break;
-        }
-        case "black-dama": {
-            for (let i = 1; row + i < 8 && col + i < 8; i++) {
-                if (!board[row + i][col + i]) {
-                    legalMoves.push({ cor: [row + i, col + i], isTaking: false });
-                } else {
-                    if (board[row + i][col + i].includes("white") && row + i + 1 < 8 && col + i + 1 < 8 && board[row + i + 1][col + i + 1] == null) {
-                        legalMoves.push({ cor: [row + i + 1, col + i + 1], isTaking: true, takeCor: [row + i, col + i] });
-                        blackTakeCords[`${row + i + 1}${col + i + 1}`] = [row + i, col + i]
-                    }
-                    break;
+
+            if (piece === "black-dama") {
+                // walking back
+                if (row + 1 <= 8 && col + 1 <= 8 && board[row + 1][col + 1] == null) {
+                    legalMoves.push({ cor: [row + 1, col + 1], isTaking: false })
+                }
+                if (row + 1 <= 8 && col - 1 >= 1 && board[row + 1][col - 1] == null) {
+                    legalMoves.push({ cor: [row + 1, col - 1], isTaking: false })
+                }
+
+                // check jump moves
+                if (row + 2 < 10 && col - 2 >= 0 && board[row + 1][col - 1] != null && board[row + 1][col - 1].startsWith("white") && board[row + 2][col - 2] == null) {
+                    legalMoves.push({ cor: [row + 2, col - 2], isTaking: true, takeCor: [row + 1, col - 1] })
+                    blackTakeCords[`${row + 2}${col - 2}`] = [row + 1, col - 1]
+                }
+                if (row + 2 < 10 && col + 2 < 10 && board[row + 1][col + 1] != null && board[row + 1][col + 1].startsWith("white") && board[row + 2][col + 2] == null) {
+                    legalMoves.push({ cor: [row + 2, col + 2], isTaking: true, takeCor: [row + 1, col + 1] })
+                    blackTakeCords[`${row + 2}${col + 2}`] = [row + 1, col + 1]
                 }
             }
-            for (let i = 1; row - i >= 0 && col - i >= 0; i++) {
-                if (!board[row - i][col - i]) {
-                    legalMoves.push({ cor: [row - i, col - i], isTaking: false });
-                } else {
-                    if (board[row - i][col - i].includes("white") && row - i - 1 >= 0 && col - i - 1 >= 0 && board[row - i - 1][col - i - 1] == null) {
-                        legalMoves.push({ cor: [row - i - 1, col - i - 1], isTaking: true, takeCor: [row - i, col - i] });
-                        blackTakeCords[`${row - i - 1}${col - i - 1}`] = [row - i, col - i]
-                    }
-                    break;
-                }
-            }
-            for (let i = 1; row + i < 8 && col - i >= 0; i++) {
-                if (!board[row + i][col - i]) {
-                    legalMoves.push({ cor: [row + i, col - i], isTaking: false });
-                } else {
-                    if (board[row + i][col - i].includes("white") && row + i + 1 < 8 && col - i - 1 >= 0 && board[row + i + 1][col - i - 1] == null) {
-                        legalMoves.push({ cor: [row + i + 1, col - i - 1], isTaking: true, takeCor: [row + i, col - i] });
-                        blackTakeCords[`${row + i + 1}${col - i - 1}`] = [row + i, col - i]
-                    }
-                    break;
-                }
-            }
-            for (let i = 1; row - i >= 0 && col + i < 8; i++) {
-                if (!board[row - i][col + i]) {
-                    legalMoves.push({ cor: [row - i, col + i], isTaking: false });
-                } else {
-                    if (board[row - i][col + i].includes("white") && row - i - 1 >= 0 && col + i + 1 < 8 && board[row - i - 1][col + i + 1] == null) {
-                        legalMoves.push({ cor: [row - i - 1, col + i + 1], isTaking: true, takeCor: [row - i, col + i] });
-                        blackTakeCords[`${row - i - 1}${col + i + 1}`] = [row - i, col + i]
-                    }
-                    break;
-                }
-            }
-            break;
+            break
         }
         default:
-            console.error("Invalid piece type");
+            console.error("Invalid piece type")
     }
-  
-    return legalMoves;
+
+    return legalMoves
 }
 
 /**
@@ -618,7 +583,8 @@ function getLegalMoves(piece, row, col, board) {
  * - `.taker` - if the piece is white for black attacker, is highlighted by this class
  */
 function resetClasses() {
-    for (var i = 0; i < 64; i++) {
+    if (blockResets) return
+    for (var i = 0; i < boardL.length ** 2; i++) {
         if (document.querySelectorAll("td.square")[i].classList.contains("there")) document.querySelectorAll("td.square")[i].classList.remove("there")
         if (document.querySelectorAll("td.square")[i].classList.contains("move")) document.querySelectorAll("td.square")[i].classList.remove("move")
         if (document.querySelectorAll("td.square")[i].classList.contains("take")) document.querySelectorAll("td.square")[i].classList.remove("take")
@@ -633,16 +599,17 @@ function resetClasses() {
  * - `.take` - all legal takes
  * - `.taker` - if the piece is white for black attacker, is highlighted by this class
  * @param {string} cellID Coordinates (or `.square` id) to get the attachment point
+ * @param {boolean} [blacksys=false] Boolean to change painting system
  */
-function paintMoves(cellID = String()) {
-    var cords = [ Number(cellID[0]), Number(cellID[1]) ]
+function paintMoves(cellID = String(), blacksys = false) {
+    var cords = [Number(cellID[0]), Number(cellID[1])]
 
     resetClasses()
 
     if (boardL[cords[0]][cords[1]] != null) {
         if (!boardL[cords[0]][cords[1]].startsWith(colorMove)) return
 
-        var lgm = getLegalMoves(boardL[cords[0]][cords[1]], cords[0], cords[1], boardL)
+        var lgm = getLegalMoves(blacksys ? "black-dama" : boardL[cords[0]][cords[1]], cords[0], cords[1], boardL)
         document.querySelector(`#board td.square[id="${cords.join("")}"]`).classList.add("there")
         //console.log(lgm, boardL[cords[0]][cords[1]], cords)
         for (let i = 0; i < lgm.length; i++) {
@@ -651,8 +618,7 @@ function paintMoves(cellID = String()) {
             if (movement.isTaking) {
                 document.querySelector(`#board td.square[id="${movement.cor.join("")}"]`).classList.add("take")
                 if (typeof movement.takeCor != "undefined") document.querySelector(`#board td.square[id="${movement.takeCor.join("")}"]`).classList.add("taker")
-            }
-            else document.querySelector(`#board td.square[id="${movement.cor.join("")}"]`).classList.add("move")
+            } else if (!blacksys) document.querySelector(`#board td.square[id="${movement.cor.join("")}"]`).classList.add("move")
         }
     }
 }
@@ -663,18 +629,17 @@ function paintMoves(cellID = String()) {
  */
 function movePiece(newCords) {
     var oldCords = document.querySelector("td.square.there").id
-    oldCords = [ Number(oldCords[0]), Number(oldCords[1]) ]
+    oldCords = [Number(oldCords[0]), Number(oldCords[1])]
     var piece = boardL[oldCords[0]][oldCords[1]]
-    newCords = [ Number(newCords[0]), Number(newCords[1]) ]
+    newCords = [Number(newCords[0]), Number(newCords[1])]
     boardL[newCords[0]][newCords[1]] = piece
     boardL[oldCords[0]][oldCords[1]] = null
 
-    if (piece == "black-normal" && newCords[0] == 0) {
+    if (piece == "black-normal" && newCords[0] <= 1) {
         boardL[newCords[0]][newCords[1]] = "black-dama"
         sounds.p.currentTime = 0
         sounds.p.play()
-    }
-    else if (piece == "white-pawn" && newCords[0] == 7) {
+    } else if (piece == "white-pawn" && newCords[0] == 8) {
         boardL[newCords[0]][newCords[1]] = "white-bishop"
         sounds.p.currentTime = 0
         sounds.p.play()
@@ -694,19 +659,21 @@ function movePiece(newCords) {
  */
 function takePiece(newCords) {
     var oldCords = document.querySelector("td.square.there").id
-    oldCords = [ Number(oldCords[0]), Number(oldCords[1]) ]
+    oldCords = [Number(oldCords[0]), Number(oldCords[1])]
     var piece = boardL[oldCords[0]][oldCords[1]]
     if (piece.startsWith("black") && typeof blackTakeCords[newCords] != "undefined") boardL[blackTakeCords[newCords][0]][blackTakeCords[newCords][1]] = null
-    newCords = [ Number(newCords[0]), Number(newCords[1]) ]
+    newCords = [Number(newCords[0]), Number(newCords[1])]
     boardL[newCords[0]][newCords[1]] = piece
     boardL[oldCords[0]][oldCords[1]] = null
 
-    if (piece == "black-normal" && newCords[0] == 0) {
+    const $fastdata = getLegalMoves("black-dama", newCords[0], newCords[1], boardL).find((x) => x.isTaking)
+
+    if (piece == "black-normal" && newCords[0] <= 1) {
         boardL[newCords[0]][newCords[1]] = "black-dama"
         sounds.p.currentTime = 0
         sounds.p.play()
     }
-    if (piece == "white-pawn" && newCords[0] == 7) {
+    if (piece == "white-pawn" && newCords[0] == 8) {
         boardL[newCords[0]][newCords[1]] = "white-bishop"
         sounds.p.currentTime = 0
         sounds.p.play()
@@ -716,8 +683,15 @@ function takePiece(newCords) {
         sounds.t.play()
     }, 75)
 
-    colorMove = colorMove == "white" ? "black" : "white"
-    regenerateBoard()
+    if (colorMove === "black" && newCords[0] > 1 && $fastdata) {
+        blockResets = true
+        regenerateBoard()
+        paintMoves(newCords.join(""), true)
+    } else {
+        blockResets = false
+        colorMove = colorMove == "white" ? "black" : "white"
+        regenerateBoard()
+    }
 }
 
 /**
@@ -726,14 +700,14 @@ function takePiece(newCords) {
 function regenerateBoard() {
     var board = document.querySelector("table#board")
     board.innerHTML = ""
-    for (var i = 0; i < 8; i++) {
+    for (var i = 0; i < boardL.length; i++) {
         var row = document.createElement("tr")
-    
-        for (var j = 0; j < 8; j++) {
+
+        for (var j = 0; j < boardL[i].length; j++) {
             if (i + j == 0) {
                 var move = document.createElement("td")
                 move.id = "move"
-                move.rowSpan = 8
+                move.rowSpan = boardL.length
                 move.style.background = `var(--${colorMove}Color)`
 
                 row.appendChild(move)
@@ -744,6 +718,7 @@ function regenerateBoard() {
             cell.id = i.toString() + j.toString()
             cell.classList.add("square")
             cell.classList.add((i + j) % 2 == 0 ? "o" : "t")
+            if (i % 9 === 0 || j % 9 === 0) cell.classList.add("red")
 
             if (boardL[i][j] != null) {
                 var piece = document.createElement("div")
@@ -754,20 +729,20 @@ function regenerateBoard() {
                 img.width = 50
                 img.height = 50
                 img.draggable = false
-                piece.appendChild(img);
+                piece.appendChild(img)
                 cell.appendChild(piece)
             }
 
             row.appendChild(cell)
         }
-    
+
         board.appendChild(row)
     }
 
     checkEndGame()
 
     var elements = document.querySelectorAll(`#board td.square`)
-    elements.forEach(element => {
+    elements.forEach((element) => {
         element.addEventListener("click", () => {
             if (element.classList.contains("there")) resetClasses()
             else if (element.classList.contains("move")) movePiece(element.id)
@@ -789,8 +764,8 @@ function checkEndGame() {
     var whiteKingHere = false
     var blackPiecesLeft = 0
 
-    for (let i = 0; i < 8; i++) {
-        for (let j = 0; j < 8; j++) {
+    for (let i = 0; i < boardL.length; i++) {
+        for (let j = 0; j < boardL[i].length; j++) {
             if (boardL[i][j] == "white-king") {
                 whiteKingHere = true
                 break
@@ -798,8 +773,8 @@ function checkEndGame() {
         }
         if (whiteKingHere) break
     }
-    for (let i = 0; i < 8; i++) {
-        for (let j = 0; j < 8; j++) {
+    for (let i = 0; i < boardL.length; i++) {
+        for (let j = 0; j < boardL[i].length; j++) {
             if (boardL[i][j] != null && boardL[i][j].startsWith("black")) {
                 blackPiecesLeft++
             }
@@ -823,5 +798,7 @@ function checkEndGame() {
     end.innerHTML += `<br /><button style="font-size: 50%" onclick="location.reload()">Jeszcze raz!</button>`
     document.body.innerHTML = ""
     document.body.appendChild(end)
-    setTimeout(() => {sounds.end.play()}, 50)
+    setTimeout(() => {
+        sounds.end.play()
+    }, 50)
 }

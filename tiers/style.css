@@ -1,6 +1,8 @@
 :root {
     --boardColor-1: #eeeed2;
     --boardColor-2: #769656;
+    --boardColor-1-toTake: #ceb5b5;
+    --boardColor-2-toTake: #643939;
     --boardColor-int-2-there: #d8d400;
     --boardColor-int-2-move: #0082ce;
     --boardColor-int-2-take: #d30000;
@@ -16,6 +18,7 @@
 
 html {
     overflow: hidden;
+    min-width: 750px;
 }
 
 body {
@@ -42,22 +45,58 @@ body {
     width: 50px;
     height: 50px;
 }
-.square.o { 
-    background: var(--boardColor-1); 
+
+.square.o {
+    background: var(--boardColor-1);
     color: var(--boardColor-2);
 }
-.square.t { 
-    background: var(--boardColor-2); 
+
+.square.t {
+    background: var(--boardColor-2);
     color: var(--boardColor-1);
 }
-.square.t.there { background: var(--boardColor-int-2-there); }
-.square.t.move { background: var(--boardColor-int-2-move); }
-.square.t.take { background: var(--boardColor-int-2-take); }
-.square.t.taker { background: var(--boardColor-int-2-taker); }
-.square.o.there { background: var(--boardColor-int-1-there); }
-.square.o.move { background: var(--boardColor-int-1-move); }
-.square.o.take { background: var(--boardColor-int-1-take); }
-.square.o.taker { background: var(--boardColor-int-1-taker); }
+
+.square.o.red {
+    background: var(--boardColor-1-toTake);
+    color: var(--boardColor-2-toTake);
+}
+
+.square.t.red {
+    background: var(--boardColor-2-toTake);
+    color: var(--boardColor-1-toTake);
+}
+
+.square.t.there {
+    background: var(--boardColor-int-2-there);
+}
+
+.square.t.move {
+    background: var(--boardColor-int-2-move);
+}
+
+.square.t.take {
+    background: var(--boardColor-int-2-take);
+}
+
+.square.t.taker {
+    background: var(--boardColor-int-2-taker);
+}
+
+.square.o.there {
+    background: var(--boardColor-int-1-there);
+}
+
+.square.o.move {
+    background: var(--boardColor-int-1-move);
+}
+
+.square.o.take {
+    background: var(--boardColor-int-1-take);
+}
+
+.square.o.taker {
+    background: var(--boardColor-int-1-taker);
+}
 
 .piece {
     margin-top: -9px;
